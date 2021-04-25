@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#1E7CDC</color>
+    <color name="colorToolbar">#36A1F6</color>
+    <color name="colorToolbarSecondary">#2ECDCD</color>
+
+    <color name="colorPrimaryDark">#234</color>
+    <color name="colorPrimary">#234</color>
+    <color name="colorPrimarybtn">#2D2F32</color>
+    <color name="colorToolbarItem">@color/colorWhite</color>
+    <color name="colorNav">#234</color>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorTextSecondary">#555555</color>
+    <color name="colorTextPrimary">#222222</color>
+    <color name="colorDullBackground">#eee</color>
+    <color name="colorAppBackground">#FFF</color>
+    <color name="colorAccentDis">#999</color>
+    <color name="colorBlue">#0099ff</color>
+
+    <color name="colorOrderAccepted">#FFB700</color>
+    <color name="colorOrderReady">#09f</color>
+    <color name="colorOrderDelivered">#48BE05</color>
+    <color name="colorOrderCancelled">#E0133C</color>
+    <color name="colorOrderNew">#CB4DFF</color>
+    <color name="colorSuccessBack">#18BC67</color>
+    <color name="colorErrorBack">#FF436E</color>
+    <color name="light_white">#f9f9f9</color>
+    <color name="colorSuccessText">#08B40F</color>
+</resources>
