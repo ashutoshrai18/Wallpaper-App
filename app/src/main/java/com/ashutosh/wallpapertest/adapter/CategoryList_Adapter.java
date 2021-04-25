@@ -40,16 +40,16 @@ public class CategoryList_Adapter extends RecyclerView.Adapter<CategoryList_Adap
 
     @Override
     public void onBindViewHolder(@NonNull Category_Adapter_ViewHolder holder, int position) {
-        Glide.with(context).load(modelList.get(position).getPageURL()).error(R.drawable.btn_card).into(holder.imageView);
-        holder.textView.setText(modelList.get(position).getTags());
+        Glide.with(context).load(modelList.get(position).getPreviewURL()).error(R.drawable.btn_card).into(holder.imageView);
+        holder.textView.setText(modelList.get(position).getName());
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(context, AllPhotoActivity.class)
-                        .putExtra("PAGE_URL",modelList.get(position).getPageLink()));
+                        .putExtra("query",modelList.get(position).getName()));
             }
         });
-        Toast.makeText(context, modelList.get(position).getTags(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, modelList.get(position).getTags(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -57,7 +57,7 @@ public class CategoryList_Adapter extends RecyclerView.Adapter<CategoryList_Adap
         return modelList.size();
     }
 
-    public class Category_Adapter_ViewHolder extends RecyclerView.ViewHolder{
+    public static class Category_Adapter_ViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView textView;
         public Category_Adapter_ViewHolder(@NonNull View itemView) {

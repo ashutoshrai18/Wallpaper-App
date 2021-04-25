@@ -10,10 +10,9 @@
 
     <Button
         android:id="@+id/btnDownloadWallpaper"
-        style="@style/ToolbarTitle"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_baseline_cloud_download_24"
         android:onClick="DownloadWallpaperEvent" />

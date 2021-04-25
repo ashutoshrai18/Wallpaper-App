@@ -1,30 +1,15 @@
 package com.ashutosh.wallpapertest;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.AbsListView;
-import android.widget.EditText;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,16 +20,13 @@ import com.ashutosh.wallpapertest.adapter.CategoryList_Adapter;
 import com.ashutosh.wallpapertest.adapter.Wallpaper_Adapter;
 import com.ashutosh.wallpapertest.model.CategoryModelList;
 import com.ashutosh.wallpapertest.model.Model;
-import com.ashutosh.wallpapertest.model.Wallpaper_Model;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,33 +38,32 @@ public class MainActivity extends AppCompatActivity {
     int page_no = 1;
     Boolean isScrolling = false;
     int currentItems, totalItems, scrollOutItems;
-    String url = "https://pixabay.com/api/?key=21200728-66e656db38c1b714199b8e589";
+
     public ArrayList<Model> globalList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        563492ad6f917000010000018a0779f0bdec43aa96c50def121a2830
+
+        API api = new API(this);
+
         recyclerView = findViewById(R.id.recyclerView);
         wallpaperModelList = new ArrayList<>();
-        wallpaperAdapter = new Wallpaper_Adapter(this, wallpaperModelList);
+        wallpaperAdapter = new Wallpaper_Adapter(this, wallpaperModelList, true);
         recyclerView.setAdapter(wallpaperAdapter);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-//        globalList = new ArrayList<>();
-//  todo CategoryModelList
+
         recyclerViewCategoryList = findViewById(R.id.categoryList);
-        categoryModelLists = new ArrayList<>();
+        buildCategories();
         categoryListAdapter = new CategoryList_Adapter(categoryModelLists, this);
         recyclerViewCategoryList.setAdapter(categoryListAdapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerViewCategoryList.setLayoutManager(gridLayoutManager);
-//        ApiHelper.getMoreImages(this, 1, list -> {
-//            globalList.addAll(list);
-//        });
-//    }
+
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -110,181 +91,32 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        fetchWallpaper();
-        fetchData();
-        carsCategoryData();
-        categoryData();
-        superHeroCategoryData();
-        bikeCategoryData();
-    }
-
-
-    public void categoryData() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String PAGE_URL = url + "&q=bike&image_type=portrait + photo&pretty=true";
-        StringRequest requestTags = new StringRequest(Request.Method.GET, PAGE_URL, new Response.Listener<String>() {
+        api.fetchWallpapers(null, new API.OnWallpapersResponseListener() {
             @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    JSONArray array = object.getJSONArray("hits");
-                        JSONObject eachPhoto = array.getJSONObject(0);
-                        CategoryModelList model = new CategoryModelList(eachPhoto.getInt("id"), eachPhoto.getString("largeImageURL"), eachPhoto.getString("tags"), eachPhoto.getString("largeImageURL"), PAGE_URL);
-                        categoryModelLists.add(model);
-                        Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
-          
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, e + "Json Error", Toast.LENGTH_SHORT).show();
-
-                }
+            public void onResponse(ArrayList<Model> models) throws JSONException {
+                wallpaperModelList.addAll(models);
+                wallpaperAdapter.notifyDataSetChanged();
             }
-        }, new Response.ErrorListener() {
 
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, error + "Volley Error", Toast.LENGTH_SHORT).show();
-
-
+            public void onError(int error) {
+                Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
             }
         });
-        queue.add(requestTags);
+
+
 
     }
 
-    public void carsCategoryData() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String PAGE_URL = url + "&q=cars&image_type=photo&pretty=true";
-        StringRequest requestTags = new StringRequest(Request.Method.GET, PAGE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    JSONArray array = object.getJSONArray("hits");
-                    JSONObject eachPhoto = array.getJSONObject(0);
-                    CategoryModelList model = new CategoryModelList(eachPhoto.getInt("id"), eachPhoto.getString("previewURL"), eachPhoto.getString("tags"), eachPhoto.getString("largeImageURL"), PAGE_URL);
-                    categoryModelLists.add(model);
-                    Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, e + "Json Error", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, error + "Volley Error", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        queue.add(requestTags);
-
+    private void buildCategories() {
+        categoryModelLists = new ArrayList<>();
+        categoryModelLists.add(new CategoryModelList("Bike", "https://pixabay.com/get/gccf4ceb29be3b9281a4753d87179c5e67eaed463e27da642bf355c5c8c23d38ed5d9673e7c25310bc1da523c1cbc9678_1280.jpg"));
+        categoryModelLists.add(new CategoryModelList("Car", "https://pixabay.com/get/gccf4ceb29be3b9281a4753d87179c5e67eaed463e27da642bf355c5c8c23d38ed5d9673e7c25310bc1da523c1cbc9678_1280.jpg"));
+        categoryModelLists.add(new CategoryModelList("Aeroplane", "https://pixabay.com/get/gccf4ceb29be3b9281a4753d87179c5e67eaed463e27da642bf355c5c8c23d38ed5d9673e7c25310bc1da523c1cbc9678_1280.jpg"));
     }
 
-    public void superHeroCategoryData() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String PAGE_URL = url + "&q=superHero&image_type=photo&pretty=true";
-        StringRequest requestTags = new StringRequest(Request.Method.GET, PAGE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    JSONArray array = object.getJSONArray("hits");
-                    JSONObject eachPhoto = array.getJSONObject(0);
-                    Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
-                    CategoryModelList model = new CategoryModelList(eachPhoto.getInt("id"), eachPhoto.getString("previewURL"), eachPhoto.getString("tags"), eachPhoto.getString("largeImageURL"), PAGE_URL);
-                    categoryModelLists.add(model);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, e + "Json Error", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, error + "Volley Error", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        queue.add(requestTags);
-
-    }
-
-    public void bikeCategoryData() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String PAGE_URL = url + "&q=animal&image_type=photo&pretty=true";
-        StringRequest requestTags = new StringRequest(Request.Method.GET, PAGE_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    JSONArray array = object.getJSONArray("hits");
-                    JSONObject eachPhoto = array.getJSONObject(0);
-                    CategoryModelList model = new CategoryModelList(eachPhoto.getInt("id"), eachPhoto.getString("previewURL"), eachPhoto.getString("tags"), eachPhoto.getString("largeImageURL"), PAGE_URL);
-                    categoryModelLists.add(model);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, e + "Json Error", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, error + "Volley Error", Toast.LENGTH_SHORT).show();
 
 
-            }
-        });
-        queue.add(requestTags);
-
-    }
-
-    public void fetchData() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    JSONArray array = object.getJSONArray("hits");
-//                    Toast.makeText(MainActivity.this, array.toString() + "", Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(MainActivity.this, "NormalList", Toast.LENGTH_SHORT).show();
-
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject eachPhoto = array.getJSONObject(i);
-                        String imageTags = eachPhoto.getString("tags");
-//                        Toast.makeText(MainActivity.this, eachPhoto.getString("largeImageURL"), Toast.LENGTH_SHORT).show();
-                        Model model = new Model(eachPhoto.getInt("id"), eachPhoto.getString("previewURL"), eachPhoto.getString("largeImageURL"));
-                        wallpaperModelList.add(model);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, e + "Json Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, error + "Volley Error", Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-        queue.add(request);
-    }
 }
 
 //    public void fetchWallpaper() {

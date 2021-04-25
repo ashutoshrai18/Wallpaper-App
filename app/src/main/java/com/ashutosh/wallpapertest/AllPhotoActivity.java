@@ -27,14 +27,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AllPhotoActivity extends AppCompatActivity {
-    String PAGE_URL, URL;
-    RecyclerView recyclerView;
-    Wallpaper_Adapter wallpaperAdapter;
-    List<Model> modelList;
-    Boolean isScrolling = false;
+    private String PAGE_URL, URL;
+    private Wallpaper_Adapter wallpaperAdapter;
+    private List<Model> modelList;
+    private Boolean isScrolling = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,13 @@ public class AllPhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_photo);
 
         Intent intent = getIntent();
-        PAGE_URL = intent.getStringExtra("PAGE_URL");
+        String query = intent.getStringExtra("query");
 
-        URL = PAGE_URL + "&per_page=1";
+//        URL = PAGE_URL + "&per_page=10";
 
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         modelList = new ArrayList<>();
-        wallpaperAdapter = new Wallpaper_Adapter(this, modelList);
+        wallpaperAdapter = new Wallpaper_Adapter(this, modelList, false);
         recyclerView.setAdapter(wallpaperAdapter);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -77,10 +78,29 @@ public class AllPhotoActivity extends AppCompatActivity {
 //
 //                }
 //            }
-        });        fetchData();
+        });
+
+        API api = new API(this);
+        Map<String, String> map = new HashMap<>();
+        map.put("q", query);
+
+        api.fetchWallpapers(map, new API.OnWallpapersResponseListener() {
+            @Override
+            public void onResponse(ArrayList<Model> models) throws JSONException {
+                modelList.addAll(models);
+                wallpaperAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(int error) {
+                Toast.makeText(AllPhotoActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        fetchData();
     }
 
-    public void fetchData() {
+    /*public void fetchData() {
         RequestQueue queue = Volley.newRequestQueue(this);
 
 
@@ -112,5 +132,5 @@ public class AllPhotoActivity extends AppCompatActivity {
             }
         });
         queue.add(request);
-    }
+    }*/
 }

@@ -4,8 +4,15 @@
     <color name="colorToolbar">#36A1F6</color>
     <color name="colorToolbarSecondary">#2ECDCD</color>
 
-    <color name="colorPrimaryDark">#234</color>
-    <color name="colorPrimary">#234</color>
+
+
+    <color name="colorBg">#E1E1E1</color>
+
+
+
+
+    <color name="colorPrimaryDark">#fff</color>
+    <color name="colorPrimary">#fff</color>
     <color name="colorPrimarybtn">#2D2F32</color>
     <color name="colorToolbarItem">@color/colorWhite</color>
     <color name="colorNav">#234</color>

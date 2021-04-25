@@ -18,19 +18,25 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class Wallpaper_Adapter extends RecyclerView.Adapter<Wallpaper_AdapterViewHolder>{
+public class Wallpaper_Adapter extends RecyclerView.Adapter<Wallpaper_Adapter.Wallpaper_AdapterViewHolder> {
     private Context context;
     private List<Model> wallpaper_modelList;
+    private boolean isHorizontal = false;
 
-    public Wallpaper_Adapter(Context context, List<Model> wallpaper_modelList) {
+    public Wallpaper_Adapter(Context context, List<Model> wallpaper_modelList, boolean isHorizontal) {
         this.context = context;
         this.wallpaper_modelList = wallpaper_modelList;
+        this.isHorizontal = isHorizontal;
     }
 
     @NonNull
     @Override
     public Wallpaper_AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.wallpaper_item,parent,false);
+        View view;
+        if (isHorizontal)
+            view = LayoutInflater.from(context).inflate(R.layout.wallpaper_item_horizontal, parent, false);
+        else
+            view = LayoutInflater.from(context).inflate(R.layout.wallpaper_item, parent, false);
         return new Wallpaper_AdapterViewHolder(view);
     }
 
@@ -41,7 +47,7 @@ public class Wallpaper_Adapter extends RecyclerView.Adapter<Wallpaper_AdapterVie
             @Override
             public void onClick(View v) {
                 context.startActivity(new Intent(context, FullViewActivity.class)
-                .putExtra("originalUrl",wallpaper_modelList.get(position).getOriginalURL()));
+                        .putExtra("originalUrl", wallpaper_modelList.get(position).getOriginalURL()));
             }
         });
     }
@@ -50,13 +56,16 @@ public class Wallpaper_Adapter extends RecyclerView.Adapter<Wallpaper_AdapterVie
     public int getItemCount() {
         return wallpaper_modelList.size();
     }
-}
 
-class Wallpaper_AdapterViewHolder extends RecyclerView.ViewHolder {
-    ImageView imageView;
-    public Wallpaper_AdapterViewHolder(@NonNull View itemView) {
-        super(itemView);
-        imageView = itemView.findViewById(R.id.imageViewItem);
+    static class Wallpaper_AdapterViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
 
+        public Wallpaper_AdapterViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.imageViewItem);
+
+        }
     }
 }
+
+
