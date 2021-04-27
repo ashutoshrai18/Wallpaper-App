@@ -63,19 +63,19 @@ public class FullViewActivity extends AppCompatActivity {
             @SuppressLint({"UseCompatLoadingForDrawables", "ResourceAsColor"})
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                FrameLayout cardView = null;
-                cardView = findViewById(R.id.cardViewDetail);
+                View bgView = findViewById(R.id.bgView);
 
                 if (isChecked) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    cardView.animate().getStartDelay();
+                    bgView.setAlpha(1);
+                    bgView.animate().alpha(0.6f).setDuration(500).setStartDelay(300);
                     toggleButton.animate().rotation(180);
-                    cardView.setBackgroundResource(R.drawable.details_card);
 
 
                 } else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    cardView.setBackgroundResource(R.drawable.card_view_card);
+                    bgView.setAlpha(0.6f);
+                    bgView.animate().alpha(1).setDuration(300).setStartDelay(0);
                     toggleButton.animate().rotation(0);
 
                 }

@@ -10,10 +10,15 @@
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <FrameLayout
-        android:background="@drawable/card_view_card"
         android:id="@+id/cardViewDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/bgView"
+            android:background="@drawable/card_view_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
