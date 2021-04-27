@@ -103,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
             }
         });
+<<<<<<< Updated upstream
+=======
+
+        queue.add(requestTags);
+>>>>>>> Stashed changes
 
 
 
@@ -115,6 +120,40 @@ public class MainActivity extends AppCompatActivity {
         categoryModelLists.add(new CategoryModelList("Aeroplane", "https://pixabay.com/get/gd0b25957a3518cb7ae475c6507faa21cbaf082f1a331258f8bda9c5ef6652b47d3eff816e855636237156e125152f3f0b86d3b92148296a5ffa708b23d04269f_1280.jpg"));
     }
 
+<<<<<<< Updated upstream
+=======
+    public void fetchData() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject object = new JSONObject(response);
+                    JSONArray array = object.getJSONArray("hits");
+//                    Toast.makeText(MainActivity.this, array.toString() + "", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this, "NormalList", Toast.LENGTH_SHORT).show();
+
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject eachPhoto = array.getJSONObject(i);
+                        String imageTags = eachPhoto.getString("tags");
+//                        Toast.makeText(MainActivity.this, eachPhoto.getString("largeImageURL"), Toast.LENGTH_SHORT).show();
+                        Model model = new Model(eachPhoto.getInt("id"), eachPhoto.getString("previewURL"), eachPhoto.getString("largeImageURL"));
+                        wallpaperModelList.add(model);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, e + "Json Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error + "Volley Error", Toast.LENGTH_SHORT).show();
+>>>>>>> Stashed changes
 
 
 }
