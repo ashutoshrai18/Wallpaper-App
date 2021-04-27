@@ -23,60 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     </LinearLayout>
-
-<!--    <com.ashutosh.wallpapertest.TextView.MontserratSemiBoldTextView-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:visibility="gone"-->
-<!--        android:id="@+id/btnSetWallpaper"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:onClick="SetWallpaperEvent"-->
-<!--        android:paddingTop="10dp"-->
-<!--        android:paddingBottom="10dp"-->
-<!--        android:paddingLeft="60dp"-->
-<!--        android:background="@drawable/button_bg"-->
-<!--        android:paddingRight="60dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        android:textColor="@color/colorWhite"-->
-<!--        android:text="Apply" />-->
-    <include layout="@layout/bottom_sheet"/>
-
-
-
-
-<!--    <include layout="@layout/toolbar_layout" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/btnDownloadWallpaper"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="30dp"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:background="@drawable/ic_baseline_cloud_download_24"-->
-<!--        android:onClick="DownloadWallpaperEvent" />-->
-
-<!--    <com.github.chrisbanes.photoview.PhotoView-->
-<!--        android:id="@+id/photoView"-->
-<!--        android:scaleType="centerCrop"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
-
-
-<!--    <com.ashutosh.wallpapertest.TextView.MontserratSemiBoldTextView-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:id="@+id/btnSetWallpaper"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:onClick="SetWallpaperEvent"-->
-<!--        android:paddingTop="10dp"-->
-<!--        android:paddingBottom="10dp"-->
-<!--        android:paddingLeft="60dp"-->
-<!--        android:background="@drawable/button_bg"-->
-<!--        android:paddingRight="60dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        android:textColor="@color/colorWhite"-->
-<!--        android:text="Apply" />-->
+    <include layout="@layout/bottom_sheet_layout"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

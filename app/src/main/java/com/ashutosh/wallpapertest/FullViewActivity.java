@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -30,6 +31,9 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.io.IOException;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+import static java.security.AccessController.getContext;
 
 public class FullViewActivity extends AppCompatActivity {
     private String originalUrl = "";
@@ -66,6 +70,7 @@ public class FullViewActivity extends AppCompatActivity {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     cardView.setBackgroundResource(R.drawable.card_view_card);
                     toggleButton.animate().rotation(0);
+
 
                 }
             }
