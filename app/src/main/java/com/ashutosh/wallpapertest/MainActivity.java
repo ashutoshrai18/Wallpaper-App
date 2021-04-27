@@ -1,4 +1,4 @@
-package com.ashutosh.wallpapertest;
+ package com.ashutosh.wallpapertest;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -110,9 +110,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void buildCategories() {
         categoryModelLists = new ArrayList<>();
-        categoryModelLists.add(new CategoryModelList("Bike", "https://pixabay.com/get/gccf4ceb29be3b9281a4753d87179c5e67eaed463e27da642bf355c5c8c23d38ed5d9673e7c25310bc1da523c1cbc9678_1280.jpg"));
-        categoryModelLists.add(new CategoryModelList("Car", "https://pixabay.com/get/gccf4ceb29be3b9281a4753d87179c5e67eaed463e27da642bf355c5c8c23d38ed5d9673e7c25310bc1da523c1cbc9678_1280.jpg"));
-        categoryModelLists.add(new CategoryModelList("Aeroplane", "https://pixabay.com/get/gccf4ceb29be3b9281a4753d87179c5e67eaed463e27da642bf355c5c8c23d38ed5d9673e7c25310bc1da523c1cbc9678_1280.jpg"));
+        categoryModelLists.add(new CategoryModelList("Bike", "https://pixabay.com/get/g55269d45dee076a3cd47bdfc10647fc56744f3a5910c24623a91ea614084992384150639fe9f5fcdb987d653f6260616_1280.jpg"));
+        categoryModelLists.add(new CategoryModelList("Car", "https://pixabay.com/get/geac12435053af4d2d8c224060cdc7143ed298f3622e3ff8ea08552ef04af560b8e35e37e48d21522ab32853e304352ea93e6abd4f7bb085bfb876a708a1b81ec_1280.jpg"));
+        categoryModelLists.add(new CategoryModelList("Aeroplane", "https://pixabay.com/get/gd0b25957a3518cb7ae475c6507faa21cbaf082f1a331258f8bda9c5ef6652b47d3eff816e855636237156e125152f3f0b86d3b92148296a5ffa708b23d04269f_1280.jpg"));
     }
 
 

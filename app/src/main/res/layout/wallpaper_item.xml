@@ -16,7 +16,8 @@
         android:id="@+id/imageViewItem"
         android:layout_width="match_parent"
         android:scaleType="centerCrop"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:contentDescription="@string/todo" />
 </androidx.cardview.widget.CardView>
 
 </LinearLayout>
