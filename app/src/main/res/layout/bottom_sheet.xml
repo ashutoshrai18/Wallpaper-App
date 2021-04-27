@@ -14,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@color/cardview_dark_background"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="30dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="40dp"
                 android:onClick="BottomSheetEvent">
 
             <ToggleButton

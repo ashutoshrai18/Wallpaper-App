@@ -34,9 +34,8 @@ import java.io.IOException;
 public class FullViewActivity extends AppCompatActivity {
     private String originalUrl = "";
     private PhotoView photoView;
-    BottomSheetBehavior bottomSheetBehavior;
-    LinearLayout linearLayout;
-    ToggleButton toggleButton;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private ToggleButton toggleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +62,6 @@ public class FullViewActivity extends AppCompatActivity {
                     toggleButton.animate().rotation(180);
                     cardView.setBackgroundResource(R.drawable.details_card);
 
-
                 } else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     cardView.setBackgroundResource(R.drawable.card_view_card);
@@ -76,7 +74,6 @@ public class FullViewActivity extends AppCompatActivity {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 toggleButton.setChecked(newState == BottomSheetBehavior.STATE_EXPANDED);
-
             }
 
             @Override
@@ -89,7 +86,6 @@ public class FullViewActivity extends AppCompatActivity {
 
     public void BottomSheetEvent(View view) {
         init();
-
     }
 
     public void SetWallpaperEvent(View view) {
@@ -118,9 +114,8 @@ public class FullViewActivity extends AppCompatActivity {
     }
 
     public void init() {
-        this.linearLayout = findViewById(R.id.bottomSheet);
+        LinearLayout linearLayout = findViewById(R.id.bottomSheet);
         this.bottomSheetBehavior = BottomSheetBehavior.from(linearLayout);
         this.toggleButton = findViewById(R.id.toggleButton);
-
     }
 }
