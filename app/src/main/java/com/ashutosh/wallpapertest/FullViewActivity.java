@@ -14,13 +14,17 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -41,6 +45,11 @@ public class FullViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        w.setStatusBarColor(Color.TRANSPARENT);
+        w.setNavigationBarColor(Color.TRANSPARENT);
+        w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         setContentView(R.layout.activity_full_view);
 //        getSupportActionBar().hide();
 
@@ -54,7 +63,7 @@ public class FullViewActivity extends AppCompatActivity {
             @SuppressLint({"UseCompatLoadingForDrawables", "ResourceAsColor"})
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                CardView cardView = null;
+                FrameLayout cardView = null;
                 cardView = findViewById(R.id.cardViewDetail);
 
                 if (isChecked) {
