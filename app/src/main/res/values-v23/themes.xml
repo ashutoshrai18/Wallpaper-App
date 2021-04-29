@@ -8,4 +8,5 @@
         <item name="android:windowBackground">@color/colorWhite</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
 </resources>

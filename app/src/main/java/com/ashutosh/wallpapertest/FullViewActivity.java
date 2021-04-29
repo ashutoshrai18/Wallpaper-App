@@ -14,14 +14,18 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -44,6 +48,11 @@ public class FullViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        w.setStatusBarColor(Color.TRANSPARENT);
+        w.setNavigationBarColor(Color.TRANSPARENT);
+        w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         setContentView(R.layout.activity_full_view);
 //        getSupportActionBar().hide();
 
@@ -57,18 +66,18 @@ public class FullViewActivity extends AppCompatActivity {
             @SuppressLint({"UseCompatLoadingForDrawables", "ResourceAsColor"})
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                CardView cardView = null;
-                cardView = findViewById(R.id.cardViewDetail);
+                View bgView = findViewById(R.id.bgView);
 
                 if (isChecked) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    cardView.animate().getStartDelay();
+                    bgView.setAlpha(1);
+                    bgView.animate().alpha(0.6f).setDuration(500).setStartDelay(300);
                     toggleButton.animate().rotation(180);
-                    cardView.setBackgroundResource(R.drawable.details_card);
 
                 } else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    cardView.setBackgroundResource(R.drawable.card_view_card);
+                    bgView.setAlpha(0.6f);
+                    bgView.animate().alpha(1).setDuration(300).setStartDelay(0);
                     toggleButton.animate().rotation(0);
 
 

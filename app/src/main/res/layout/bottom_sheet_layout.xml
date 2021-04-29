@@ -9,12 +9,18 @@
     app:behavior_peekHeight="?actionBarSize"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:id="@+id/cardViewDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@color/cardview_dark_background"
         app:cardCornerRadius="30dp">
+
+        <View
+            android:id="@+id/bgView"
+            android:background="@drawable/card_view_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -74,5 +80,5 @@
                 android:src="@drawable/ic_baseline_share_24" />
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </LinearLayout>

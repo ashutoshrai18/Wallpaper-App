@@ -12,8 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WallpaperTest">
-        <activity android:name=".AllPhotoActivity"></activity>
-        <activity android:name=".AllImageActivity" />
+        <activity android:name=".AllPhotoActivity" />
         <activity android:name=".SearchViewActivity" />
         <activity android:name=".FullViewActivity" />
         <activity android:name=".MainActivity">
