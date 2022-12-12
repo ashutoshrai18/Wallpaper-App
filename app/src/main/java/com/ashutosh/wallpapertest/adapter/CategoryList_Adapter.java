@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +38,9 @@ public class CategoryList_Adapter extends RecyclerView.Adapter<CategoryList_Adap
     @Override
     public void onBindViewHolder(@NonNull Category_Adapter_ViewHolder holder, int position) {
         Glide.with(context).load(modelList.get(position).getPreviewURL()).error(R.drawable.btn_card).into(holder.imageView);
+        Glide.with(context).load(modelList.get(position).getPreviewURL()).error(R.drawable.btn_card).into(holder.imageView);
         holder.textView.setText(modelList.get(position).getName());
+        Toast.makeText(context, "" + modelList.get(position).getName(), Toast.LENGTH_SHORT).show();
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

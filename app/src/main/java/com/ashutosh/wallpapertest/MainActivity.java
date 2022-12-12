@@ -6,31 +6,27 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.ashutosh.wallpapertest.adapter.CategoryList_Adapter;
 import com.ashutosh.wallpapertest.adapter.Wallpaper_Adapter;
 import com.ashutosh.wallpapertest.model.CategoryModelList;
 import com.ashutosh.wallpapertest.model.Model;
+import com.ashutosh.wallpapertest.model.Wallpaper_Model;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView, recyclerViewCategoryList;
+    RecyclerView recyclerViewHori, recyclerViewCategoryList;
     Wallpaper_Adapter wallpaperAdapter;
     CategoryList_Adapter categoryListAdapter;
     List<Model> wallpaperModelList;
@@ -38,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     int page_no = 1;
     Boolean isScrolling = false;
     int currentItems, totalItems, scrollOutItems;
+
+    TextView moreButton;
 
     public ArrayList<Model> globalList;
 
@@ -49,13 +47,22 @@ public class MainActivity extends AppCompatActivity {
 
         API api = new API(this);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerViewHori = findViewById(R.id.recyclerView);
+        moreButton = findViewById(R.id.moreButton);
+        moreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, AllWallpaperActivity.class);
+                startActivity(i);
+//                i.putExtra("item", wallpaperModelList);
+            }
+        });
         wallpaperModelList = new ArrayList<>();
         wallpaperAdapter = new Wallpaper_Adapter(this, wallpaperModelList, true);
-        recyclerView.setAdapter(wallpaperAdapter);
+        recyclerViewHori.setAdapter(wallpaperAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerViewHori.setLayoutManager(layoutManager);
 
         recyclerViewCategoryList = findViewById(R.id.categoryList);
         buildCategories();
@@ -65,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCategoryList.setLayoutManager(gridLayoutManager);
 
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerViewHori.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -110,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void buildCategories() {
         categoryModelLists = new ArrayList<>();
-        categoryModelLists.add(new CategoryModelList("Bike", "https://pixabay.com/get/g55269d45dee076a3cd47bdfc10647fc56744f3a5910c24623a91ea614084992384150639fe9f5fcdb987d653f6260616_1280.jpg"));
-        categoryModelLists.add(new CategoryModelList("Car", "https://pixabay.com/get/geac12435053af4d2d8c224060cdc7143ed298f3622e3ff8ea08552ef04af560b8e35e37e48d21522ab32853e304352ea93e6abd4f7bb085bfb876a708a1b81ec_1280.jpg"));
-        categoryModelLists.add(new CategoryModelList("Aeroplane", "https://pixabay.com/get/gd0b25957a3518cb7ae475c6507faa21cbaf082f1a331258f8bda9c5ef6652b47d3eff816e855636237156e125152f3f0b86d3b92148296a5ffa708b23d04269f_1280.jpg"));
+        categoryModelLists.add(new CategoryModelList("Bike", "https://cdn.pixabay.com/photo/2016/04/07/06/53/bmw-1313343_960_720.jpg"));
+        categoryModelLists.add(new CategoryModelList("Car", "https://cdn.pixabay.com/photo/2016/11/22/23/44/porsche-1851246_960_720.jpg"));
+        categoryModelLists.add(new CategoryModelList("Nature", "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"));
     }
 
 
