@@ -33,8 +33,8 @@ import java.util.Map;
 
 public class AllPhotoActivity extends AppCompatActivity {
     private String PAGE_URL, URL;
-    private Wallpaper_Adapter wallpaperAdapter;
-    private List<Model> modelList;
+        private Wallpaper_Adapter wallpaperAdapter;
+        private List<Model> modelList;
     private Boolean isScrolling = false;
 
     @Override

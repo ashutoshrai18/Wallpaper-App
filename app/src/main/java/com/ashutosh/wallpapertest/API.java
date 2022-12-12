@@ -56,7 +56,7 @@ public class API {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject eachPhoto = array.getJSONObject(i);
 //                    String imageTags = eachPhoto.getString("tags");
-                    Model model = new Model(eachPhoto.getInt("id"), eachPhoto.getString("previewURL"), eachPhoto.getString("largeImageURL"));
+                    Model model = new Model(eachPhoto.getInt("id"), eachPhoto.getString("webformatURL"), eachPhoto.getString("largeImageURL"));
                     models.add(model);
                 }
                 onWallpapersResponseListener.onResponse(models);
