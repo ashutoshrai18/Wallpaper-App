@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -10,11 +11,13 @@
         android:elevation="0dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-        <com.ashutosh.wallpapertest.TextView.MontserratSemiBoldTextView
+        <com.ashutosh.wallpapertest.TextView.ProductSansMediumTextView
             android:id="@+id/toolbarTitle"
             android:layout_width="match_parent"
-            android:textColor="#111"
             android:layout_height="wrap_content"
-            android:text="Kashi Wallapaper" />
+            android:text="Kashi Wallapaper"
+            android:textColor="#111"
+            android:textSize="20dp" />
+
     </androidx.appcompat.widget.Toolbar>
 </RelativeLayout>

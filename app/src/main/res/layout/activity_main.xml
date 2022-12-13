@@ -3,79 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
     <include layout="@layout/toolbar_layout" />
 
     <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <LinearLayout
-                android:id="@+id/testLayout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <com.ashutosh.wallpapertest.TextView.MontserratSemiBoldTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="15dp"
-                    android:text="Category"
-                    android:textSize="16dp" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categoryList"
-                android:nestedScrollingEnabled="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/testLayout" />
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:id="@+id/titleLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/categoryList"
                 android:orientation="horizontal">
 
                 <com.ashutosh.wallpapertest.TextView.MontserratSemiBoldTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorNav"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:text="Images"
+                    android:layout_marginStart="15dp"
+                    android:text="Best of Months"
                     android:textSize="16sp" />
 
 
                 <com.ashutosh.wallpapertest.TextView.MontserratSemiBoldTextView
                     android:id="@+id/moreButton"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="4dp"
+                    android:background="@drawable/more_item_btn"
+                    android:gravity="center"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
-                    android:layout_width="wrap_content"
                     android:text="more"
-                    android:textColor="@android:color/white"
-                    android:gravity="center"
-                    android:layout_height="40dp"
-                    android:background="@drawable/more_item_btn" />
-                <!--<ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_baseline_arrow_forward_24" />-->
+                    android:textColor="@android:color/white" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -83,17 +58,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/titleLayout"
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="5dp"
                 android:scrollbars="none" />
-
-
-            <TextView
-                android:id="@+id/textView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                <com.ashutosh.wallpapertest.TextView.MontserratSemiBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorNav"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:text="Color Tone"
+                    android:textSize="16dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="25dp"
+                    android:id="@+id/colorList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                    <com.ashutosh.wallpapertest.TextView.MontserratSemiBoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorNav"
+
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:text="Category"
+                        android:textSize="16dp" />
+<!--                </LinearLayout>-->
+                <!--                    android:layout_below="@id/testLayout"-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="25dp"
+                    android:id="@+id/categoryList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+
+                <!--<TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />-->
+
+            </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

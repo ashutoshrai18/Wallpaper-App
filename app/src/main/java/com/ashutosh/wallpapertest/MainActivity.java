@@ -68,8 +68,10 @@ public class MainActivity extends AppCompatActivity {
         buildCategories();
         categoryListAdapter = new CategoryList_Adapter(categoryModelLists, this);
         recyclerViewCategoryList.setAdapter(categoryListAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2 );
-        recyclerViewCategoryList.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager linearLayoutCategory = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2 );
+        recyclerViewCategoryList.setLayoutManager(linearLayoutCategory);
 
 
         recyclerViewHori.addOnScrollListener(new RecyclerView.OnScrollListener() {
