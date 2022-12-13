@@ -1,6 +1,5 @@
- package com.ashutosh.wallpapertest;
+package com.ashutosh.wallpapertest;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,31 +8,36 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ashutosh.wallpapertest.adapter.CategoryList_Adapter;
+import com.ashutosh.wallpapertest.adapter.ColorsAdapter;
 import com.ashutosh.wallpapertest.adapter.Wallpaper_Adapter;
 import com.ashutosh.wallpapertest.model.CategoryModelList;
+import com.ashutosh.wallpapertest.model.ColorsModel;
 import com.ashutosh.wallpapertest.model.Model;
-import com.ashutosh.wallpapertest.model.Wallpaper_Model;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerViewHori, recyclerViewCategoryList;
+    RecyclerView rVBOM, recyclerViewCategoryList, rvColors, rvPopular;
     Wallpaper_Adapter wallpaperAdapter;
     CategoryList_Adapter categoryListAdapter;
+    ColorsAdapter colorsAdapter;
+    List<ColorsModel> colorsModels;
     List<Model> wallpaperModelList;
     List<CategoryModelList> categoryModelLists;
     int page_no = 1;
     Boolean isScrolling = false;
     int currentItems, totalItems, scrollOutItems;
+
 
     TextView moreButton;
 
@@ -46,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         API api = new API(this);
+        buildColors();
 
-        recyclerViewHori = findViewById(R.id.recyclerView);
+
+        rVBOM = findViewById(R.id.recyclerView);
+        rvColors = findViewById(R.id.colorList);
         moreButton = findViewById(R.id.moreButton);
         moreButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,22 +66,28 @@ public class MainActivity extends AppCompatActivity {
         });
         wallpaperModelList = new ArrayList<>();
         wallpaperAdapter = new Wallpaper_Adapter(this, wallpaperModelList, true);
-        recyclerViewHori.setAdapter(wallpaperAdapter);
-
+        rVBOM.setAdapter(wallpaperAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewHori.setLayoutManager(layoutManager);
+        rVBOM.setLayoutManager(layoutManager);
+
+
+        colorsAdapter = new ColorsAdapter(colorsModels, this);
+        rvColors.setAdapter(colorsAdapter);
+        LinearLayoutManager lLColor = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvColors.setLayoutManager(lLColor);
+
 
         recyclerViewCategoryList = findViewById(R.id.categoryList);
         buildCategories();
         categoryListAdapter = new CategoryList_Adapter(categoryModelLists, this);
         recyclerViewCategoryList.setAdapter(categoryListAdapter);
         LinearLayoutManager linearLayoutCategory = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2 );
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerViewCategoryList.setLayoutManager(linearLayoutCategory);
 
+        PWallpaper();
 
-        recyclerViewHori.addOnScrollListener(new RecyclerView.OnScrollListener() {
+/*        rVBOM.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -97,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //                }
 //            }
-        });
+        });*/
 
 
         api.fetchWallpapers(null, new API.OnWallpapersResponseListener() {
@@ -113,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void buildCategories() {
@@ -125,6 +136,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void buildColors() {
+        colorsModels = new ArrayList<>();
+//        colorsModels.add(new ColorsModel(1,"aliceblue", 0xFFf0f8ff));
+//        colorsModels.add(new ColorsModel(2,"antiquewhite",0xFFfaebd7));
+        colorsModels.add(new ColorsModel(2, "aqua", 0xFF00ffff));
+        colorsModels.add(new ColorsModel(2, "aquamarine", 0xFF7fffd4));
+        colorsModels.add(new ColorsModel(2, "bisque", 0xFFffe4c4));
+        colorsModels.add(new ColorsModel(2, "black", 0xFF000000));
+        colorsModels.add(new ColorsModel(2, "blue", 0xFF0000ff));
+        colorsModels.add(new ColorsModel(2, "blueviolet", 0xFF8a2be2));
+        colorsModels.add(new ColorsModel(2, "brown", 0xFFa52a2a));
+        colorsModels.add(new ColorsModel(2, "cadetblue", 0xFF5f9ea0));
+        colorsModels.add(new ColorsModel(2, "chocolate", 0xFFd2691e));
+        colorsModels.add(new ColorsModel(2, "cyan", 0xFF00ffff));
+    }
+
+
+
+    private void PWallpaper() {
+        rvPopular = findViewById(R.id.rVPopular);
+        wallpaperAdapter = new Wallpaper_Adapter(this, wallpaperModelList, true);
+        rvPopular.setAdapter(wallpaperAdapter);
+        LinearLayoutManager lLPopularWall = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvPopular.setLayoutManager(lLPopularWall);
+
+        API api = new API(this);
+        Map<String, String> map = new HashMap<>();
+        map.put("q", "Popular");
+
+        api.fetchWallpapers(map, new API.OnWallpapersResponseListener() {
+            @Override
+            public void onResponse(ArrayList<Model> models) throws JSONException {
+                wallpaperModelList.addAll(models);
+                wallpaperAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(int error) {
+                Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
 
 }
 

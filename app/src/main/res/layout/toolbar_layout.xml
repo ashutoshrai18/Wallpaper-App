@@ -15,7 +15,7 @@
             android:id="@+id/toolbarTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kashi Wallapaper"
+            android:text="Kashi Wallpaper"
             android:textColor="#111"
             android:textSize="20dp" />
 

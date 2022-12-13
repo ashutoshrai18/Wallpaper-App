@@ -58,6 +58,7 @@ public class API {
 //                    String imageTags = eachPhoto.getString("tags");
                     Model model = new Model(eachPhoto.getInt("id"), eachPhoto.getString("webformatURL"), eachPhoto.getString("largeImageURL"));
                     models.add(model);
+
                 }
                 onWallpapersResponseListener.onResponse(models);
             }

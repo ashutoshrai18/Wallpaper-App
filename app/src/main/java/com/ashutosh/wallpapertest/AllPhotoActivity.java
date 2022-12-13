@@ -90,7 +90,6 @@ public class AllPhotoActivity extends AppCompatActivity {
                 modelList.addAll(models);
                 wallpaperAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onError(int error) {
                 Toast.makeText(AllPhotoActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
