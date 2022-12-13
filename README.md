@@ -1,8 +1,8 @@
 # Wallpapers
 
-## Screensshots
 ### **PIXABAY API** : [https://pixabay.com/api/](https://pixabay.com/api/)
 
+Simple Wallpaper App using PIXABAY API.
 
 
 <p float="left">
