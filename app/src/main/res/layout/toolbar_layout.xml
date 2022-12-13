@@ -15,8 +15,8 @@
             android:id="@+id/toolbarTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kashi Wallpaper"
-            android:textColor="#111"
+            android:text="Wallpapers"
+            android:textColor="@color/colorNav"
             android:textSize="20dp" />
 
     </androidx.appcompat.widget.Toolbar>
